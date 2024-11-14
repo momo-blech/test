@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu 3D - Porte à résoudre avec murs</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+    <!-- Inclure la bibliothèque Three.js via un CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- Boîte de dialogue de la fée -->
+    <div class="fairy-dialog" id="fairyDialog">
+        Bonjour ! Je suis ta fée. Appuie sur "E" pour me parler.
+    </div>
+    <div id="timer" style="position: absolute; top: 20px; right: 20px; padding: 10px; background-color: black; color: white; font-size: 24px;">
+        Temps restant : <span id="timeLeft">00:10</span>
+        </div>
+
+    <!-- Boîte de dialogue pour l'opération mathématique -->
+    <div class="math-dialog" id="mathDialog">
+        <div>Résolvez cette opération :</div>
+        <span id="mathQuestion"></span><br>
+        <input type="text" id="answerInput" placeholder="Votre réponse ici..."><br>
+        <button onclick="submitAnswer()">OK</button>
+    </div>
+
+    <!-- Message sur la porte -->
+    <div class="door-message" id="doorMessage">
+        Appuyez sur "F" pour résoudre le problème.
+    </div>
+
+    <button id="fullscreenButton" style="position: absolute; top: 10px; left: 10px; z-index: 10;">Plein écran</button>
+    <audio id="fairySound" src="{% static 'sounds/momo.mp3' %}" preload="auto"></audio>
+
+    <script src="{% static 'js/jeu.js' %}"></script>
+</body>
+</html>

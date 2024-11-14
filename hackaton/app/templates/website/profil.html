@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personnalisation de l'Avatar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .avatar-preview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        canvas {
+            border: 2px solid #333;
+            background-color: #f4f4f9;
+        }
+        .avatar-customization {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .avatar-customization div {
+            text-align: center;
+        }
+        .avatar-customization select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personnalisation de l'Avatar</h1>
+
+        <!-- Prévisualisation de l'avatar via Canvas -->
+        <div class="avatar-preview">
+            <canvas id="avatarCanvas" width="200" height="300"></canvas>
+        </div>
+
+        <!-- Personnalisation de l'avatar -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="avatar-customization">
+                <!-- Choix de coiffure -->
+                <div>
+                    <label for="hairStyle">Coiffure :</label>
+                    <select id="hairStyle" name="hairStyle" onchange="drawAvatar()">
+                        <option value="short">Courte</option>
+                        <option value="long">Longue</option>
+                        <option value="curly">Bouclée</option>
+                        <option value="bald">Chauve</option>
+                    </select>
+                </div>
+        
+                <!-- Choix de vêtements -->
+                <div>
+                    <label for="outfit">Vêtements :</label>
+                    <select id="outfit" name="outfit" onchange="drawAvatar()">
+                        <option value="tshirt">T-shirt</option>
+                        <option value="shirt">Chemise</option>
+                        <option value="sweater">Pull</option>
+                        <option value="jacket">Veste</option>
+                    </select>
+                </div>
+        
+                <!-- Choix de couleur de peau -->
+                <div>
+                    <label for="skinColor">Couleur de peau :</label>
+                    <select id="skinColor" name="skinColor" onchange="drawAvatar()">
+                        <option value="light">Claire</option>
+                        <option value="medium">Moyenne</option>
+                        <option value="dark">Foncée</option>
+                    </select>
+                </div>
+            </div>
+        
+            <!-- Bouton pour enregistrer l'avatar -->
+            <button type="submit">Enregistrer l'Avatar</button>
+        </form>
+
+        <!-- Bouton pour naviguer vers la page Élève -->
+        <button onclick="window.location.href='/eleve'">Retour à la Page Élève</button>
+    </div>
+
+    <script>
+        function drawAvatar() {
+            const canvas = document.getElementById('avatarCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Effacer le canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Récupérer les sélections
+            const hairStyle = document.getElementById('hairStyle').value;
+            const outfit = document.getElementById('outfit').value;
+            const skinColor = document.getElementById('skinColor').value;
+
+            // Définir les couleurs en fonction de la sélection de la couleur de peau
+            let skinTone;
+            if (skinColor === 'light') skinTone = '#f9d3b4';
+            else if (skinColor === 'medium') skinTone = '#d2a679';
+            else if (skinColor === 'dark') skinTone = '#8d5524';
+
+            // Dessiner la tête
+            ctx.fillStyle = skinTone;
+            ctx.beginPath();
+            ctx.arc(100, 100, 50, 0, Math.PI * 2); // Position (x=100, y=100), Rayon = 50
+            ctx.fill();
+
+            // Dessiner les cheveux
+            ctx.fillStyle = '#333'; // Couleur des cheveux
+            if (hairStyle === 'short') {
+                ctx.fillRect(60, 50, 80, 30); // Coiffure courte
+            } else if (hairStyle === 'long') {
+                ctx.fillRect(50, 50, 100, 80); // Coiffure longue
+            } else if (hairStyle === 'curly') {
+                ctx.beginPath();
+                ctx.arc(100, 80, 60, 0, Math.PI * 2); // Cheveux bouclés
+                ctx.fill();
+            } // Si chauve, rien à dessiner pour les cheveux
+
+            // Dessiner le corps (vêtements)
+            if (outfit === 'tshirt') {
+                ctx.fillStyle = '#00aaff'; // T-shirt bleu
+                ctx.fillRect(60, 150, 80, 100);
+            } else if (outfit === 'shirt') {
+                ctx.fillStyle = '#00ff00'; // Chemise verte
+                ctx.fillRect(60, 150, 80, 100);
+            } else if (outfit === 'sweater') {
+                ctx.fillStyle = '#ff6600'; // Pull orange
+                ctx.fillRect(60, 150, 80, 100);
+            } else if (outfit === 'jacket') {
+                ctx.fillStyle = '#333'; // Veste noire
+                ctx.fillRect(60, 150, 80, 100);
+            }
+        }
+
+        // Dessiner l'avatar initial lors du chargement de la page
+        window.onload = function() {
+            drawAvatar();
+        };
+    </script>
+</body>
+</html>
+
+           

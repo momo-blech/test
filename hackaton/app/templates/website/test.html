@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Scene</title>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .sound-toggle {
+            padding: 10px;
+            font-size: 1.5rem;
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .sound-toggle:hover {
+            background-color: #FF6347;
+        }
+        
+        .volume-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Espace entre le curseur et le bouton */
+        }
+        
+        .volume-slider {
+            width: 100px;
+            background-color: #FF4500;
+            transform: rotateY(180deg); /* Inverser l'orientation du curseur */
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="volume-control">
+    <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider">
+    <button id="sound-toggle" class="sound-toggle">🔊</button>
+    </div>
+    
+    <!-- Inclure la bibliothèque Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="{% static 'js/character.js' %}"></script>
+    <script src="{% static 'js/controls.js' %}"></script>
+    <script src="{% static 'js/camera.js' %}"></script>
+    <script src="{% static 'js/fairy.js' %}"></script>
+    <script src="{% static 'js/maze.js' %}"></script>
+    <script src="{% static 'js/door.js' %}"></script>
+    <script src="{% static 'js/mouseControls.js' %}"></script>
+    <script src="{% static 'collision.js' %}"></script>
+    <script src="{% static 'js/scene2.js' %}"></script>
+    <script src="{% static 'js/son.js' %}"></script>
+
+</body>
+</html>

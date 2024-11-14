@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage 3D OBJ avec Contrôle Souris</title>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Inclusion de la bibliothèque Three.js, du loader OBJ et des contrôles Orbit -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // Création de la scène, de la caméra et du rendu
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);  // Fond blanc
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Ajout d'une lumière ambiante et directionnelle
+        const ambientLight = new THREE.AmbientLight(0x404040, 2); // Lumière ambiante douce
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 5, 5).normalize();
+        scene.add(directionalLight);
+
+        // Chargement du modèle OBJ via une URL statique Django
+        const objLoader = new THREE.OBJLoader();
+        const modelURL = "{% static 'models/FinalBaseMesh.obj' %}"; // Utilisation de Django static
+
+        objLoader.load(modelURL, function (object) {
+            object.scale.set(0.5, 0.5, 0.5);  // Réduction de la taille de l'objet
+            object.position.set(0, -1, 0);  // Positionner le modèle dans la scène
+            scene.add(object);
+        });
+
+        // Positionnement de la caméra
+        camera.position.set(0, 2, 10);
+
+        // Ajout des contrôles de la souris (OrbitControls)
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; // Ajout d'une fluidité lors de la rotation
+        controls.dampingFactor = 0.05; // Facteur de fluidité
+        controls.screenSpacePanning = false; // Désactiver le panoramique avec la souris
+        controls.minDistance = 2; // Distance minimale de zoom
+        controls.maxDistance = 50; // Distance maximale de zoom
+        controls.maxPolarAngle = Math.PI / 2; // Empêche la caméra de passer sous le sol
+
+        // Animation et rendu
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();  // Mettre à jour les contrôles à chaque frame
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Ajustement de la taille de la fenêtre
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>

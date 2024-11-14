@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techniques d'apprentissage</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .techniques-container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .technique {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .technique:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .technique h2 {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .technique h2::before {
+            content: "";
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: #3498db;
+            mask: url('https://cdn-icons-png.flaticon.com/512/3507/3507425.png') no-repeat center;
+            mask-size: cover;
+        }
+
+        .technique p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .technique:nth-child(odd) {
+            background-color: #eaf2f8;
+        }
+
+        .technique:nth-child(even) {
+            background-color: #f0f9ff;
+        }
+
+        /* Bouton de retour */
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff4500;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #ff6347;
+            transform: scale(1.05);
+        }
+
+        /* Animation for appearance */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .techniques-container {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Techniques d'apprentissage</h1>
+
+    <div class="techniques-container">
+        <div class="technique">
+            <h2>Technique 1 : La méthode des répétitions espacées</h2>
+            <p>Cette méthode consiste à revoir les informations régulièrement à des intervalles croissants pour améliorer la rétention à long terme. Elle est particulièrement utile pour les examens et l'apprentissage à long terme.</p>
+        </div>
+
+        <div class="technique">
+            <h2>Technique 2 : L’apprentissage par l’exemple</h2>
+            <p>Apprenez en travaillant sur des cas concrets ou des exercices pratiques afin de renforcer vos connaissances théoriques par l'expérience. Cela vous aide à appliquer directement ce que vous avez appris.</p>
+        </div>
+
+        <div class="technique">
+            <h2>Technique 3 : Le mind mapping</h2>
+            <p>Utilisez des cartes mentales pour organiser et structurer vos idées visuellement. Le mind mapping aide à mieux comprendre les concepts complexes et à les mémoriser plus facilement.</p>
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="{% url 'page_accueil' %}" class="back-button">Retour</a>
+    </div>
+
+</body>
+</html>
