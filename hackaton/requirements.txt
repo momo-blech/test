@@ -371,3 +371,4 @@ zope.interface @ file:///C:/ci/zope.interface_1625036252485/work
 gunicorn==20.1.0
 google-api-python-client==2.100.0
 requests==2.31.0
+langchain_community==0.3.3
