@@ -368,3 +368,6 @@ yarl==1.16.0
 zict==2.1.0
 zipp @ file:///C:/ci/zipp_1652273994994/work
 zope.interface @ file:///C:/ci/zope.interface_1625036252485/work
+gunicorn==20.1.0
+google-api-python-client==2.100.0
+requests==2.31.0
