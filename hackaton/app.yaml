@@ -2,3 +2,7 @@ runtime: python39
 service: default
 
 entrypoint: gunicorn -b :$PORT hackaton.wsgi
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: "hackaton.settings"
+  SECRET_KEY: "django-insecure-(an^y0zu87p$a43w*d(s!=msybou+kob7+29--9a$8m@ucp_z-"
