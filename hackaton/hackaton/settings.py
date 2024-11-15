@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(an^y0zu87p$a43w*d(s!=msybou+kob7+29--9a$8m@ucp_z-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gen-lang-client-0221153242.ew.r.appspot.com', 'localhost']
 
 
 # Application definition
@@ -117,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Google App Engine l'utilisera
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -125,3 +125,5 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEBUG = False
