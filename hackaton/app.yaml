@@ -1,2 +1,4 @@
 runtime: python39
-service: noteapp
+service: default
+
+entrypoint: gunicorn -b :$PORT hackaton.wsgi
