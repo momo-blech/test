@@ -119,7 +119,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Google App Engine l'utilisera
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'app/static',
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
