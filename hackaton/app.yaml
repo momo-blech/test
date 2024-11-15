@@ -1,2 +1,2 @@
 runtime: python39
-entrypoint: gunicorn -b :$PORT hackaton.wsgi  # hackaton.wsgi correspond au chemin vers wsgi.py dans votre projet
+service: noteapp
